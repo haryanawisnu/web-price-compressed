@@ -1,0 +1,23 @@
+{
+  "name": "web-price-compressed",
+  "version": "1.0.0",
+  "description": "Web price compresed from more website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/haryanawisnu/web-price-compressed.git"
+  },
+  "keywords": [
+    "mongoose",
+    "api"
+  ],
+  "author": "teamHack",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/haryanawisnu/web-price-compressed/issues"
+  },
+  "homepage": "https://github.com/haryanawisnu/web-price-compressed#readme"
+}
