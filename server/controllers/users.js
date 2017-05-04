@@ -17,7 +17,7 @@ module.exports = {
         res.json({
           success: false,
           error: true,
-          err_message: err,
+          err_message: `Err getAll, msg : '${err}'`,
           data: null
         });
       }
@@ -40,7 +40,7 @@ module.exports = {
         res.json({
           success: false,
           error: true,
-          err_message: err,
+          err_message: `Err getOne, msg : '${err}'`,
           data: null
         });
       }
@@ -50,13 +50,22 @@ module.exports = {
   create: (req, res, next) => {
     User.create({
       username: req.body.username,
-      password: req.body.password,
-      expire_date: req.body.expire_date
-    }, function(error, result) {
+      password: req.body.password
+    }, function(err, result) {
       if (result) {
-        res.json(result);
+        res.json({
+          success: true,
+          error: false,
+          err_message: null,
+          data: result
+        });
       } else {
-        res.send(`ERR input :\n ${error}`);
+        res.json({
+          success: false,
+          error: true,
+          err_message: `Err create, msg : '${err}'`,
+          data: null
+        });
       }
     });
   },
@@ -65,11 +74,21 @@ module.exports = {
     let id = req.params.id;
     User.remove({
       _id: id
-    }, function(err) {
-      if (!err) {
-        res.send(`Success remove with id ${id}`);
+    }, function(err, result) {
+      if (result) {
+        res.json({
+          success: true,
+          error: false,
+          err_message: null,
+          data: result
+        });
       } else {
-        res.send(`ERR input :\n ${error}`);
+        res.json({
+          success: false,
+          error: true,
+          err_message: `Err delete, msg : '${err}'`,
+          data: null
+        });
       }
     });
   },
@@ -90,13 +109,28 @@ module.exports = {
           }
         }, function(err, result) {
           if (result) {
-            res.json(result);
+            res.json({
+              success: true,
+              error: false,
+              err_message: null,
+              data: result
+            });
           } else {
-            res.send(`ERR Update :\n ${err}`);
+            res.json({
+              success: false,
+              error: true,
+              err_message: `Err findUpt1, msg : '${err}'`,
+              data: null
+            });
           }
         });
       } else {
-        res.send(`ERR getall :\n ${err}`);
+        res.json({
+          success: false,
+          error: true,
+          err_message: `Err findUpt1, msg : '${err}'`,
+          data: null
+        });
       }
     });
   }
