@@ -19,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/haryanawisnu/web-price-compressed/issues"
   },
-  "homepage": "https://github.com/haryanawisnu/web-price-compressed#readme"
+  "homepage": "https://github.com/haryanawisnu/web-price-compressed#readme",
+  "dependencies": {
+    "body-parser": "^1.17.1",
+    "express": "^4.15.2",
+    "jsonwebtoken": "^7.4.0",
+    "mongoose": "^4.9.7",
+    "password-hash": "^1.2.2"
+  }
 }
