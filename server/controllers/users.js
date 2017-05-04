@@ -105,8 +105,7 @@ module.exports = {
           _id: id
         }, {
           $set: {
-            username: req.body.username || result.username,
-            password: passwordHash.generate(req.body.password) || result.password
+            username: req.body.username || result.username
           }
         }, function(err, result) {
           if (result) {
