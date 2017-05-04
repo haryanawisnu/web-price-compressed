@@ -1,5 +1,7 @@
 //require folder models to file foods
 var User = require('../models/users');
+var passwordHash = require('password-hash');
+var jwthelpers = require('../helpers/jwtHelpers');
 
 //export function
 module.exports = {
@@ -17,7 +19,7 @@ module.exports = {
         res.json({
           success: false,
           error: true,
-          err_message: `Err getAll, msg : '${err}'`,
+          err_message: `Err getAll, msg : ${err}`,
           data: null
         });
       }
@@ -50,7 +52,7 @@ module.exports = {
   create: (req, res, next) => {
     User.create({
       username: req.body.username,
-      password: req.body.password
+      password: passwordHash.generate(req.body.password)
     }, function(err, result) {
       if (result) {
         res.json({
@@ -103,9 +105,8 @@ module.exports = {
           _id: id
         }, {
           $set: {
-            name: req.body.name || result.name,
-            price: req.body.price || result.price,
-            expire_date: req.body.expire_date || result.expire_date
+            username: req.body.username || result.username,
+            password: passwordHash.generate(req.body.password) || result.password
           }
         }, function(err, result) {
           if (result) {
@@ -119,7 +120,7 @@ module.exports = {
             res.json({
               success: false,
               error: true,
-              err_message: `Err findUpt1, msg : '${err}'`,
+              err_message: `Err findUpt1, msg : ${err}`,
               data: null
             });
           }
@@ -128,10 +129,42 @@ module.exports = {
         res.json({
           success: false,
           error: true,
-          err_message: `Err findUpt1, msg : '${err}'`,
+          err_message: `Err findUpt1, msg : ${err}`,
           data: null
         });
       }
     });
+  },
+  signin: (req, res, next) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    User.findOne({
+      username: username
+    }).then(user => {
+      if (!user) {
+        res.json({
+          success: false,
+          error: true,
+          err_message: `User not found.`,
+          data: null
+        });
+      } else if (user) {
+        if (passwordHash.verify(password, user.password)) {
+          res.json({
+            success: true,
+            error: false,
+            err_message: null,
+            data: jwthelpers.sign(user)
+          });
+        } else {
+          res.json({
+            success: false,
+            error: true,
+            err_message: `Wrong password.`,
+            data: null
+          });
+        }
+      }
+    })
   }
 }

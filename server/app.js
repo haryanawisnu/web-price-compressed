@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 //init HTTP Route
-app.use('/users', users);
+app.use('/', users);
 
 //App listes localhost:3000
 app.listen(3000)

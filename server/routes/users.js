@@ -4,13 +4,16 @@ var express = require('express');
 var router = express.Router();
 //require folder controllers
 var usersControllers = require('../controllers/users');
+var jwthelpers = require('../helpers/jwtHelpers');
 
 //setting HTTP methods to Router
-router.get('/', usersControllers.getall);
-router.get('/:id', usersControllers.getone);
-router.post('/', usersControllers.create);
-router.delete('/:id', usersControllers.delete);
-router.put('/:id', usersControllers.update);
+router.get('/users', jwthelpers.login, usersControllers.getall); //admin only
+router.get('/users/:id', jwthelpers.login, usersControllers.getone);
+router.post('/users', jwthelpers.login, usersControllers.create);
+router.delete('/users/:id', jwthelpers.login, usersControllers.delete);
+router.put('/users/:id', jwthelpers.login, usersControllers.update);
+router.post('/signup', usersControllers.create);
+router.post('/signin', usersControllers.signin);
 
 //export Router
 module.exports = router;
