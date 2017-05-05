@@ -7,6 +7,8 @@ var users = require('./routes/users');
 
 //require module Body Parser
 var bodyParser = require('body-parser');
+const cors = require('cors');
+app.use(cors());
 
 //require module DB Mongoose
 var mongoose = require('mongoose');
