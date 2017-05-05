@@ -2,8 +2,8 @@ var bukalapak = require('../models/bukalapak');
 var ebay = require('../models/ebay');
 
 module.exports = {
-  getdata1: function(req, res) {
-    bukalapak(req.params.str, function(err, result) {
+  showBukalapak: function(req, res) {
+    bukalapak(req.params.keyword, function(err, result) {
       if (!err) {
         res.json({
           success: true,
@@ -21,8 +21,8 @@ module.exports = {
       }
     })
   },
-  getdata2: function(req, res) {
-    ebay(req.params.str, function(err, result) {
+  showEbay: function(req, res) {
+    ebay(req.params.keyword, function(err, result) {
       if (!err) {
         res.json({
           success: true,
