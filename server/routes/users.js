@@ -6,6 +6,9 @@ var router = express.Router();
 var usersControllers = require('../controllers/users');
 var jwthelpers = require('../helpers/jwtHelpers');
 
+// require passport
+var passport = require('passport');
+
 //setting HTTP methods to Router
 router.get('/users', jwthelpers.login, usersControllers.getall); //admin only
 router.get('/users/:id', jwthelpers.login, usersControllers.getone);

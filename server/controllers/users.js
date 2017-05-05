@@ -135,31 +135,29 @@ module.exports = {
     });
   },
   signin: (req, res, next) => {
-    let username = req.body.username;
-    let password = req.body.password;
     User.findOne({
-      username: username
-    }).then(user => {
-      if (!user) {
+      username: req.body.username
+    }).exec(function(err, result) {
+      if (!result) {
         res.json({
           success: false,
           error: true,
-          err_message: `User not found.`,
+          err_message: 'Authentication failed. User not found.',
           data: null
         });
-      } else if (user) {
-        if (passwordHash.verify(password, user.password)) {
+      } else if (result) {
+        if (passwordHash.verify(req.body.password, result.password)) {
           res.json({
             success: true,
             error: false,
             err_message: null,
-            data: jwthelpers.sign(user)
+            data: jwthelpers.sign(result)
           });
         } else {
           res.json({
             success: false,
             error: true,
-            err_message: `Wrong password.`,
+            err_message: 'Authentication failed. Password Wrong.',
             data: null
           });
         }
