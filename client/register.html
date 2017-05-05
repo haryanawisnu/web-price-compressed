@@ -14,11 +14,11 @@
       <nav class="navbar navbar-default">
         <div class="container-fluid">
           <div class="navbar-header">
-            <a class="navbar-brand" id="brand" href="#">MurMer</a>
+            <a class="navbar-brand" id="brand" href="index.html">MurMer</a>
           </div>
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Sign In</a></li>
-            <li><a href="register.html">Register</a></li>
+            <li><a href="index.html">Sign In</a></li>
+            <li class="active"><a href="#">Register</a></li>
           </ul>
         </div>
       </nav>
@@ -32,7 +32,7 @@
             <label for="">Password:</label>
             <input type="password" v-model="password" placeholder="Enter password" class="form-control"/>
           </div>
-          <button type="button" v-on:click="signIn" class="btn btn-default">Sign In</button>
+          <button type="button" v-on:click="signIn" class="btn btn-default">Register</button>
         </form>
       </div>
     </div>
@@ -46,12 +46,13 @@ var app = new Vue({
   },
   methods: {
     signIn: function() {
-      axios.post('http://localhost:3000/signin', {
+      axios.post('http://localhost:3000/signup', {
         username: this.username,
         password: this.password
       }).then((response) => {
-        localStorage.setItem('token', response.data)
-        location.href="search.html"
+        alert('user successfully created')
+        console.log(response)
+        location.href="index.html"
       }).catch((err) => {
         console.log(err);
       })

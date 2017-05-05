@@ -1,0 +1,40 @@
+.form {
+  position: absolute;
+  padding: 20px;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  letter-spacing: 5px;
+  border: 10px solid;
+  border-radius: 10px;
+}
+
+.navbar-brand {
+  font-family: 'Lobster';
+  font-size: 64px;
+}
+
+#brand {
+  color: black;
+}
+
+.crop {
+  width: 540px;
+  height: 150px;
+  overflow: hidden;
+}
+
+#input {
+  width: 500px;
+}
+
+.align-center{
+  text-align: center;
+}
+
+.mdm{
+  width: 200px;
+  height: 200px;
+  overflow: hidden;
+}
